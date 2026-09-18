@@ -1,0 +1,10 @@
+build_from:
+  aarch64: python:3.11-slim-bookworm
+  amd64: python:3.11-slim-bookworm
+labels:
+  org.opencontainers.image.title: "Home Assistant Add-on: Needle 3"
+  org.opencontainers.image.description: "Run the Cactus Compute Needle 3 playground locally"
+  org.opencontainers.image.source: "https://github.com/dzervas/ha-addon-needle-conversation"
+  org.opencontainers.image.licenses: "MIT"
+args:
+  NEEDLE_VERSION: "3.0.2"

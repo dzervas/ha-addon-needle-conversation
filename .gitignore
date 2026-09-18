@@ -1,0 +1,4 @@
+__pycache__/
+*.py[cod]
+*.zip
+addon-needle-3/.test/

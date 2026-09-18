@@ -1,0 +1,48 @@
+{
+  "title": "Needle Conversation",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Needle",
+        "description": "Enter a direct URL reachable from Home Assistant Core. For the local Needle 3 add-on, use its Supervisor-internal address.",
+        "data": {
+          "url": "Needle server URL",
+          "confidence_threshold": "Minimum confidence",
+          "timeout": "Request timeout",
+          "max_calls": "Maximum actions per request"
+        },
+        "data_description": {
+          "url": "For the local add-on, use http://local-addon-needle-3:7860",
+          "confidence_threshold": "Needle outputs below this score are rejected.",
+          "timeout": "Initial inference can be slow on small systems.",
+          "max_calls": "Requests returning more actions than this are rejected."
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Needle",
+        "description": "Update the direct Needle server connection and safety limits.",
+        "data": {
+          "url": "Needle server URL",
+          "confidence_threshold": "Minimum confidence",
+          "timeout": "Request timeout",
+          "max_calls": "Maximum actions per request"
+        },
+        "data_description": {
+          "url": "For the local add-on, use http://local-addon-needle-3:7860",
+          "confidence_threshold": "Needle outputs below this score are rejected.",
+          "timeout": "Initial inference can be slow on small systems.",
+          "max_calls": "Requests returning more actions than this are rejected."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to a compatible Needle server",
+      "invalid_url": "Enter a valid HTTP or HTTPS URL",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "This Needle server is already configured",
+      "reconfigure_successful": "Needle was reconfigured"
+    }
+  }
+}
