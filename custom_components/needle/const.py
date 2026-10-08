@@ -17,3 +17,8 @@ MAX_MAX_CALLS = 8
 MIN_TIMEOUT = 10
 MAX_TIMEOUT = 300
 
+
+CONF_STT_LANGUAGE = "stt_language"
+DEFAULT_STT_LANGUAGE = "en"
+STT_LANGUAGES = ("en", "de", "fr", "es", "it", "nl", "pl")
+MAX_AUDIO_BYTES = 16000 * 2 * 30

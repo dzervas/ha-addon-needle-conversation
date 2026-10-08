@@ -25,7 +25,6 @@ PY
 )"
 
 args=(
-    playground
     --host "0.0.0.0"
     --port "${PORT}"
 )
@@ -63,4 +62,4 @@ else
 fi
 
 echo "The Needle 3 playground will listen on port ${PORT}."
-exec needle "${args[@]}"
+exec python3 /app/server.py "${args[@]}"

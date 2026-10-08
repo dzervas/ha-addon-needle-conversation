@@ -1,6 +1,6 @@
 name: "Needle 3"
-description: "Run the Cactus Compute Needle 3 local tool-calling playground"
-version: "3.0.2-2"
+description: "Run the Cactus Compute Needle 3 local tool-calling playground and Whistle speech recognition"
+version: "3.1.0-1"
 slug: "addon_needle_3"
 url: "https://github.com/dzervas/ha-addon-needle-conversation/tree/main/addon-needle-3"
 arch:

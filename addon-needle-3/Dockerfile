@@ -3,7 +3,7 @@
 FROM python:3.11-slim-bookworm
 
 ARG BUILD_ARCH=amd64
-ARG NEEDLE_VERSION=3.0.2
+ARG NEEDLE_VERSION=3.1.0
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -27,7 +27,7 @@ RUN apt-get update \
         tini \
     && rm -rf /var/lib/apt/lists/* \
     && python3 -m pip install --no-cache-dir "cactus-needle==${NEEDLE_VERSION}" \
-    # Needle 3.0.2 uses origin-root URLs (for example /style.css and /model).
+    # Needle 3.1.0 uses origin-root URLs (for example /style.css and /model).
     # Home Assistant ingress mounts the app below a tokenized path, so make all
     # bundled UI resources and API calls relative to that ingress path.
     && playground="/usr/local/lib/python3.11/site-packages/needle/playground" \
@@ -43,14 +43,6 @@ RUN apt-get update \
         -e 's|fetch("/|fetch("./|g' \
         -e 's|dl.href = "/download/|dl.href = "./download/|g' \
         "${playground}/app.js" \
-    # Needle 3.0.2's playground still labels the base as Needle 2 and resets
-    # the generation-2 library directly. Reset the active agent instead.
-    && grep -Fq '"needle-2 (base)"' "${playground}/server.py" \
-    && test "$(grep -Fc '_lib().needle_reset()' "${playground}/server.py")" -eq 2 \
-    && sed -i \
-        -e 's|"needle-2 (base)"|"needle-3 (base)"|g' \
-        -e 's|_lib().needle_reset()|self.agent.reset()|g' \
-        "${playground}/server.py" \
     && case "${BUILD_ARCH}" in \
         amd64) platform_tag="manylinux2014_x86_64" ;; \
         aarch64) platform_tag="manylinux2014_aarch64" ;; \
@@ -64,8 +56,11 @@ RUN apt-get update \
     # Needle 3 separates the engine from the base .cact weights. Download the
     # weights into the default cache below HOME so playground can load them
     # without network access and still report calibrated confidence.
-    && python3 -c 'from needle.agent.fetch import fetch_weights; from pathlib import Path; p = Path(fetch_weights(3)); assert p.is_file() and p.stat().st_size > 0, p' \
+    && python3 -c 'from needle.agent.fetch import fetch_weights; from pathlib import Path; paths = [Path(fetch_weights(g)) for g in (3, "whistle")]; assert all(p.is_file() and p.stat().st_size > 0 for p in paths)' \
     && test -s /opt/needle-engine/libneedle.so
+
+# Both base models are baked into HOME; disable Hub requests at runtime.
+ENV HF_HUB_OFFLINE=1
 
 COPY rootfs /
 

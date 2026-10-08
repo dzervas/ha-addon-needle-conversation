@@ -9,13 +9,15 @@
           "url": "Needle server URL",
           "confidence_threshold": "Minimum confidence",
           "timeout": "Request timeout",
-          "max_calls": "Maximum actions per request"
+          "max_calls": "Maximum actions per request",
+          "stt_language": "Whistle language"
         },
         "data_description": {
           "url": "For the local add-on, use http://local-addon-needle-3:7860",
           "confidence_threshold": "Needle outputs below this score are rejected.",
           "timeout": "Initial inference can be slow on small systems.",
-          "max_calls": "Requests returning more actions than this are rejected."
+          "max_calls": "Requests returning more actions than this are rejected.",
+          "stt_language": "Speech recognition language (English by default). Select the same language in your Assist pipeline. Greek is not supported."
         }
       },
       "reconfigure": {
@@ -25,13 +27,15 @@
           "url": "Needle server URL",
           "confidence_threshold": "Minimum confidence",
           "timeout": "Request timeout",
-          "max_calls": "Maximum actions per request"
+          "max_calls": "Maximum actions per request",
+          "stt_language": "Whistle language"
         },
         "data_description": {
           "url": "For the local add-on, use http://local-addon-needle-3:7860",
           "confidence_threshold": "Needle outputs below this score are rejected.",
           "timeout": "Initial inference can be slow on small systems.",
-          "max_calls": "Requests returning more actions than this are rejected."
+          "max_calls": "Requests returning more actions than this are rejected.",
+          "stt_language": "Speech recognition language (English by default). Select the same language in your Assist pipeline. Greek is not supported."
         }
       }
     },

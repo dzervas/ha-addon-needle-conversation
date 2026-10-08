@@ -1,3 +1,13 @@
+## 3.1.0-1
+
+- Bundle cactus-needle 3.1.0, its speech-capable native engine, and Whistle weights.
+- Add `/stt` capability discovery and bounded `/transcribe` PCM16 input on the
+  existing internal HTTP port. Keep Whistle in its own process to isolate the
+  native runtime's global state from conversation and playground operations.
+- Expose Whistle through custom integration 0.3.0 as an Assist STT entity.
+- Add a speech language selector defaulting to English, including reconfiguration.
+- Keep older add-on connections working as conversation-only integrations.
+
 # Changelog
 
 ## 3.0.2-2

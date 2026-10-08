@@ -37,6 +37,27 @@ class NeedleClient:
             raise NeedleResponseError("Needle /model response has no model name")
         return name.strip()
 
+    async def async_stt_languages(self) -> list[str]:
+        """Discover speech support; older playgrounds have no STT endpoint."""
+        payload = await self._async_json("GET", "/stt")
+        languages = payload.get("languages")
+        if not isinstance(languages, list) or not all(
+            isinstance(language, str) for language in languages
+        ):
+            raise NeedleResponseError("Invalid Whistle language list")
+        return languages
+
+    async def async_transcribe(self, audio: bytes, language: str) -> str:
+        """Send raw 16 kHz, mono, signed little-endian PCM16."""
+        payload = await self._async_json(
+            "POST", "/transcribe", data=audio,
+            headers={"Content-Type": "audio/pcm", "X-Language": language},
+        )
+        text = payload.get("text")
+        if not isinstance(text, str) or "error" in payload:
+            raise NeedleResponseError("Whistle returned no transcript")
+        return text
+
     async def async_complete(
         self, query: str, tools: list[dict[str, Any]]
     ) -> dict[str, Any]:
