@@ -1,5 +1,7 @@
 # Needle ships a manylinux (glibc) native library, so this add-on must use a
-# Debian/glibc image. Do not use Home Assistant's Alpine-based base image here.
+# Debian/glibc image. Supervisor supplies the target platform via --platform;
+# this multi-architecture image supports both amd64 and aarch64.
+# Keep all build defaults here: build.yaml is deprecated by Supervisor.
 FROM python:3.11-slim-bookworm
 
 ARG BUILD_ARCH=amd64
@@ -80,10 +82,10 @@ HEALTHCHECK \
     CMD ["/app/healthcheck.sh"]
 
 ARG BUILD_DATE
-ARG BUILD_DESCRIPTION
-ARG BUILD_NAME
+ARG BUILD_DESCRIPTION="Run the Cactus Compute Needle 3 local tool-calling playground and Whistle speech recognition"
+ARG BUILD_NAME="Needle 3"
 ARG BUILD_REF
-ARG BUILD_REPOSITORY
+ARG BUILD_REPOSITORY=dzervas/ha-addon-needle-conversation
 ARG BUILD_VERSION
 
 LABEL \

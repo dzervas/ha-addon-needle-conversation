@@ -1,3 +1,12 @@
+# Changelog
+
+## 3.1.0-2
+
+- Remove deprecated `build.yaml`, including base image values rejected by
+  Supervisor's legacy image validation.
+- Keep the multi-architecture Debian image, pinned Needle version, and image
+  metadata defaults in the Dockerfile.
+
 ## 3.1.0-1
 
 - Bundle cactus-needle 3.1.0, its speech-capable native engine, and Whistle weights.
@@ -7,8 +16,6 @@
 - Expose Whistle through custom integration 0.3.0 as an Assist STT entity.
 - Add a speech language selector defaulting to English, including reconfiguration.
 - Keep older add-on connections working as conversation-only integrations.
-
-# Changelog
 
 ## 3.0.2-2
 

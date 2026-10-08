@@ -956,7 +956,7 @@ internal port does not conflict with port `7860` used inside another add-on.
 
 If the ingress page loads without styling or browser developer tools show
 requests to the Home Assistant origin such as `/style.css`, rebuild or
-reinstall add-on version `3.1.0-1`. Restarting an older container does not
+reinstall add-on version `3.1.0-2`. Restarting an older container does not
 update the bundled playground files.
 
 ### A custom model fails to load
