@@ -2,6 +2,9 @@
 
 DOMAIN = "needle"
 
+# Supervisor prefixes repository-installed apps with the repository identifier.
+DEFAULT_URL = "http://18153281-addon-needle-3:7860"
+
 CONF_CONFIDENCE_THRESHOLD = "confidence_threshold"
 CONF_MAX_CALLS = "max_calls"
 CONF_TIMEOUT = "timeout"

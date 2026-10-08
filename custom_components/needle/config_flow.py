@@ -33,6 +33,7 @@ from .const import (
     DEFAULT_MAX_CALLS,
     DEFAULT_TIMEOUT,
     DOMAIN,
+    DEFAULT_URL,
     MAX_CONFIDENCE_THRESHOLD,
     MAX_MAX_CALLS,
     MAX_TIMEOUT,
@@ -134,7 +135,7 @@ class NeedleConfigFlow(ConfigFlow, domain=DOMAIN):
         """Handle initial setup."""
         errors: dict[str, str] = {}
         defaults = user_input or {
-            CONF_URL: "http://local-addon-needle-3:7860",
+            CONF_URL: DEFAULT_URL,
             CONF_CONFIDENCE_THRESHOLD: DEFAULT_CONFIDENCE_THRESHOLD,
             CONF_TIMEOUT: DEFAULT_TIMEOUT,
             CONF_MAX_CALLS: DEFAULT_MAX_CALLS,
@@ -145,7 +146,8 @@ class NeedleConfigFlow(ConfigFlow, domain=DOMAIN):
                 url, model_name = await self._async_validate(user_input)
             except ValueError:
                 errors["base"] = "invalid_url"
-            except NeedleError:
+            except NeedleError as err:
+                _LOGGER.warning("Unable to connect to the Needle server: %s", err)
                 errors["base"] = "cannot_connect"
             except Exception:
                 _LOGGER.exception("Unexpected error while connecting to Needle")
@@ -174,7 +176,8 @@ class NeedleConfigFlow(ConfigFlow, domain=DOMAIN):
                 url, model_name = await self._async_validate(user_input)
             except ValueError:
                 errors["base"] = "invalid_url"
-            except NeedleError:
+            except NeedleError as err:
+                _LOGGER.warning("Unable to connect to the Needle server: %s", err)
                 errors["base"] = "cannot_connect"
             except Exception:
                 _LOGGER.exception("Unexpected error while connecting to Needle")

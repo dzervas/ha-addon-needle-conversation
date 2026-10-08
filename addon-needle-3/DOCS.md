@@ -1,3 +1,8 @@
+> **Connection address:** A repository install uses
+> `http://18153281-addon-needle-3:7860`. A local install under `/addons` uses
+> `http://local-addon-needle-3:7860`. For forks, replace underscores in the
+> installed Supervisor app identifier with hyphens to obtain its hostname.
+
 > **Whistle update (3.1.0-1):** This add-on now includes local speech recognition.
 > Update the custom integration to 0.3.0, restart Home Assistant, and choose
 > **Whistle** under **Settings → Voice assistants → Speech-to-text**. The
@@ -82,7 +87,7 @@ Home Assistant Core runs in a different container, so do not use
 DNS name instead:
 
 ```text
-http://local-addon-needle-3:7860
+http://18153281-addon-needle-3:7860
 ```
 
 This address is reachable from Home Assistant Core and other containers on the
@@ -90,7 +95,7 @@ Supervisor network, but not from ordinary devices on your LAN. Test it from a
 Home Assistant REST command or the Needle Conversation integration:
 
 ```bash
-curl http://local-addon-needle-3:7860/model
+curl http://18153281-addon-needle-3:7860/model
 ```
 
 A ready add-on returns a response similar to:
@@ -106,7 +111,7 @@ loaded model and monitor availability:
 
 ```yaml
 rest:
-  - resource: "http://local-addon-needle-3:7860/model"
+  - resource: "http://18153281-addon-needle-3:7860/model"
     scan_interval: 60
     timeout: 10
     sensor:
@@ -155,7 +160,7 @@ file does not exist.
 Needle listens on TCP port `7860` inside the Supervisor container network. The
 port is deliberately not mapped to the Home Assistant host. Use **Open Web UI**
 or the sidebar panel for authenticated browser access, and use
-`http://local-addon-needle-3:7860` from Home Assistant Core.
+`http://18153281-addon-needle-3:7860` from Home Assistant Core.
 
 Needle's playground does not provide its own authentication. Do not add a host
 port mapping unless direct LAN access is explicitly required and separately
@@ -201,7 +206,7 @@ Add this to `configuration.yaml`:
 ```yaml
 rest_command:
   needle_route_light_command:
-    url: "http://local-addon-needle-3:7860/complete"
+    url: "http://18153281-addon-needle-3:7860/complete"
     method: POST
     content_type: "application/json"
     timeout: 120
@@ -434,7 +439,7 @@ one Home Assistant release.
 
 The integration's UI configuration flow should collect:
 
-- the Needle base URL, `http://local-addon-needle-3:7860`;
+- the Needle base URL, `http://18153281-addon-needle-3:7860`;
 - a request timeout, with a generous default such as 120 seconds;
 - the minimum accepted confidence;
 - the allowed Home Assistant actions;
@@ -753,7 +758,7 @@ panel_iframe:
   needle:
     title: "Needle"
     icon: "mdi:needle"
-    url: "http://local-addon-needle-3:7860"
+    url: "http://18153281-addon-needle-3:7860"
 ```
 
 This works only when the browser can reach that address. Browsers may block an
@@ -781,7 +786,7 @@ curl \
     }],
     "query": "it is time for bed"
   }' \
-  http://local-addon-needle-3:7860/complete
+  http://18153281-addon-needle-3:7860/complete
 ```
 
 In Node-RED, use an HTTP Request node, then a JSON node, a Switch node that

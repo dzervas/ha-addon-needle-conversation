@@ -1,3 +1,8 @@
+> **Connection address:** A repository install uses
+> `http://18153281-addon-needle-3:7860`. A local install under `/addons` uses
+> `http://local-addon-needle-3:7860`. For forks, replace underscores in the
+> installed Supervisor app identifier with hyphens to obtain its hostname.
+
 > **Whistle update (3.1.0-1):** This add-on now includes local speech recognition.
 > Update the custom integration to 0.3.0, restart Home Assistant, and choose
 > **Whistle** under **Settings → Voice assistants → Speech-to-text**. The
@@ -96,7 +101,7 @@ Home Assistant Core and the add-on run in separate containers. Do not use
 for the add-on:
 
 ```text
-local-addon-needle-3
+18153281-addon-needle-3
 ```
 
 Port `7860` remains inside the Supervisor network and is not exposed to LAN
@@ -104,7 +109,7 @@ devices. Use **Open Web UI** to test the playground. Home Assistant Core calls
 the internal endpoint directly:
 
 ```text
-http://local-addon-needle-3:7860/model
+http://18153281-addon-needle-3:7860/model
 ```
 
 A ready add-on returns model information similar to:
@@ -117,7 +122,7 @@ If this request fails, do not continue yet. Check:
 
 - that the add-on is running;
 - that its log contains no model-loading error;
-- that the internal hostname is exactly `local-addon-needle-3`;
+- that the internal hostname is exactly `18153281-addon-needle-3`;
 - that Home Assistant is an OS or Supervised installation using Supervisor.
 
 ## Stage 3: Add the Needle REST command
@@ -131,7 +136,7 @@ contain two top-level `rest_command:` keys.
 ```yaml
 rest_command:
   needle_route_light_command:
-    url: "http://local-addon-needle-3:7860/complete"
+    url: "http://18153281-addon-needle-3:7860/complete"
     method: POST
     content_type: "application/json"
     timeout: 120
@@ -569,7 +574,7 @@ After installing such an integration:
 2. Open **Settings → Devices & services**.
 3. Add the Needle conversation integration.
 4. Configure the URL as
-   `http://local-addon-needle-3:7860`.
+   `http://18153281-addon-needle-3:7860`.
 5. Verify that its connection test reads `GET /model`.
 6. Open **Settings → Voice assistants**.
 7. Edit the desired assistant.

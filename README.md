@@ -46,7 +46,10 @@ Then:
 
 1. Open **Settings → Devices & services → Add integration**.
 2. Add **Needle Conversation**.
-3. Use `http://local-addon-needle-3:7860` as the server URL.
+3. Use `http://18153281-addon-needle-3:7860` as the server URL when installed
+   from this repository. If installed locally under `/addons`, use
+   `http://local-addon-needle-3:7860` instead. For forks or alternate repository
+   URLs, use the installed app identifier with underscores replaced by hyphens.
 4. Under **Settings → Voice assistants**, select **Needle Conversation** as the
    conversation agent for the desired Assist pipeline.
 5. Select **Whistle** under **Speech-to-text**. Keep your existing text-to-speech
@@ -64,6 +67,13 @@ for Whistle to appear. Older add-ons continue to provide conversation only.
 Only entities exposed to Assist can be controlled. Start with harmless devices
 and keep the default confidence gate until you have tested your own entity names
 and commands.
+
+If setup reports **Cannot connect to a compatible Needle server**, first check
+that the app is started and the URL uses its actual Supervisor identifier.
+For example, `18153281_addon_needle_3` becomes `18153281-addon-needle-3`. The
+`local-` prefix applies only to locally installed apps. The app log should show
+`Needle 3 and Whistle ready on port 7860`. Home Assistant Core logs now include
+the underlying connection or response error for failed setup/reconfiguration.
 
 ## Requirements
 

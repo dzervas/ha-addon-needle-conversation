@@ -22,7 +22,7 @@
 - Stop publishing the playground port on the Home Assistant host and LAN.
 - Keep browser access behind authenticated Home Assistant ingress.
 - Document the Supervisor-internal endpoint at
-  `http://local-addon-needle-3:7860` for Home Assistant Core clients.
+  `http://18153281-addon-needle-3:7860` for Home Assistant Core clients.
 
 ## 3.0.2-1
 
