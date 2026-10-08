@@ -14,6 +14,10 @@ This repository contains two pieces:
   validates Needle's structured calls, and executes them with the requesting
   user's Home Assistant context.
 
+The integration also registers **Whistle** as a selectable speech-to-text engine
+when connected to the updated add-on. Speech stays local; no microphone or GPU
+access is required by the add-on.
+
 Both are required because an add-on cannot register an Assist conversation
 entity or safely execute actions inside Home Assistant, while a custom
 integration should not bundle and supervise the native inference runtime.
@@ -45,6 +49,17 @@ Then:
 3. Use `http://local-addon-needle-3:7860` as the server URL.
 4. Under **Settings → Voice assistants**, select **Needle Conversation** as the
    conversation agent for the desired Assist pipeline.
+5. Select **Whistle** under **Speech-to-text**. Keep your existing text-to-speech
+   provider (for example, Piper); Whistle handles speech recognition only.
+6. The integration's **Whistle language** setting defaults to **English**. Change
+   it during setup or via the integration's **Reconfigure** menu, and select the
+   same language in the Assist pipeline.
+
+Whistle supports English, German, French, Spanish, Italian, Dutch, and Polish.
+**Greek is not supported.** Audio must be 16 kHz mono PCM16, with a maximum of
+30 seconds per utterance. Longer utterances fail rather than being truncated.
+Update both the add-on and custom integration, then restart/reload the integration
+for Whistle to appear. Older add-ons continue to provide conversation only.
 
 Only entities exposed to Assist can be controlled. Start with harmless devices
 and keep the default confidence gate until you have tested your own entity names
@@ -63,3 +78,14 @@ Detailed add-on and troubleshooting documentation is in
 
 MIT. Needle itself is maintained by Cactus Compute and distributed separately
 under its own terms.
+
+## Development checks
+
+Use Python 3.12 or newer. Install `requirements-test.txt`, then run `pytest -q`.
+Provider tests use lightweight Home Assistant interface doubles; HTTP tests use
+real sockets. To also exercise the native runtime, prefetch the generation-3
+engine and both models, set `NEEDLE3_LIB_PATH` and `NEEDLE_TEST_NATIVE=1`, and run
+pytest again. Optionally set `NEEDLE_TEST_SPEECH_PCM` to Whisper's JFK fixture
+converted to raw 16 kHz mono PCM16. This checks recognition and subsequent Needle
+tool calls in the same running server. A live Home Assistant/Supervisor install
+is still required to verify the voice-assistant UI and container lifecycle.

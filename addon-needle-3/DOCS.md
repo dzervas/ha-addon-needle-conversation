@@ -1,3 +1,14 @@
+> **Whistle update (3.1.0-1):** This add-on now includes local speech recognition.
+> Update the custom integration to 0.3.0, restart Home Assistant, and choose
+> **Whistle** under **Settings → Voice assistants → Speech-to-text**. The
+> integration's **Whistle language** setting defaults to **English**; use
+> **Reconfigure** to change it and match the pipeline language. Supported:
+> English, German, French, Spanish, Italian, Dutch, Polish (no Greek).
+> Keep your existing TTS provider. Audio is limited to 30 seconds per utterance.
+> The playground, conversation API, and `/transcribe` endpoint share the existing
+> internal port 7860; no additional LAN port is exposed. The instructions below
+> that use Whisper can alternatively use Whistle.
+
 # Home Assistant Add-on: Needle 3
 
 Run the [Cactus Compute Needle](https://github.com/cactus-compute/needle) local
@@ -945,7 +956,7 @@ internal port does not conflict with port `7860` used inside another add-on.
 
 If the ingress page loads without styling or browser developer tools show
 requests to the Home Assistant origin such as `/style.css`, rebuild or
-reinstall add-on version `3.0.2-2`. Restarting an older container does not
+reinstall add-on version `3.1.0-1`. Restarting an older container does not
 update the bundled playground files.
 
 ### A custom model fails to load

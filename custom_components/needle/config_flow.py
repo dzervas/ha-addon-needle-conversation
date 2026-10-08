@@ -11,6 +11,8 @@ from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
 from homeassistant.const import CONF_URL
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.selector import (
+    SelectSelector,
+    SelectSelectorConfig,
     NumberSelector,
     NumberSelectorConfig,
     NumberSelectorMode,
@@ -23,6 +25,9 @@ from .client import NeedleClient, NeedleError
 from .const import (
     CONF_CONFIDENCE_THRESHOLD,
     CONF_MAX_CALLS,
+    CONF_STT_LANGUAGE,
+    DEFAULT_STT_LANGUAGE,
+    STT_LANGUAGES,
     CONF_TIMEOUT,
     DEFAULT_CONFIDENCE_THRESHOLD,
     DEFAULT_MAX_CALLS,
@@ -43,6 +48,15 @@ def _schema(defaults: dict[str, Any]) -> probatio.Schema:
     """Build the configuration schema."""
     return probatio.Schema(
         {
+            probatio.Required(
+                CONF_STT_LANGUAGE,
+                default=defaults.get(CONF_STT_LANGUAGE, DEFAULT_STT_LANGUAGE),
+            ): SelectSelector(SelectSelectorConfig(options=[
+                {"value": code, "label": label}
+                for code, label in zip(STT_LANGUAGES, (
+                    "English", "German", "French", "Spanish", "Italian", "Dutch", "Polish"
+                ), strict=True)
+            ])),
             probatio.Required(
                 CONF_URL,
                 description={"suggested_value": defaults.get(CONF_URL, "")},

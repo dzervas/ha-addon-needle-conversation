@@ -7,4 +7,4 @@ labels:
   org.opencontainers.image.source: "https://github.com/dzervas/ha-addon-needle-conversation"
   org.opencontainers.image.licenses: "MIT"
 args:
-  NEEDLE_VERSION: "3.0.2"
+  NEEDLE_VERSION: "3.1.0"

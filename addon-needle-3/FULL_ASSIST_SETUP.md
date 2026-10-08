@@ -1,3 +1,14 @@
+> **Whistle update (3.1.0-1):** This add-on now includes local speech recognition.
+> Update the custom integration to 0.3.0, restart Home Assistant, and choose
+> **Whistle** under **Settings → Voice assistants → Speech-to-text**. The
+> integration's **Whistle language** setting defaults to **English**; use
+> **Reconfigure** to change it and match the pipeline language. Supported:
+> English, German, French, Spanish, Italian, Dutch, Polish (no Greek).
+> Keep your existing TTS provider. Audio is limited to 30 seconds per utterance.
+> The playground, conversation API, and `/transcribe` endpoint share the existing
+> internal port 7860; no additional LAN port is exposed. The instructions below
+> that use Whisper can alternatively use Whistle.
+
 # Full Assist setup with Needle 3
 
 This guide connects the Needle 3 add-on to a Home Assistant Assist voice
